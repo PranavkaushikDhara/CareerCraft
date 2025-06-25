@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  
+  /* CareerCraft Custom Colors */
+  --color-CareerCraftPrimary: #1B9AF5;
+  --color-CareerCraftPrimaryDark: #007ACC;
+  --color-CareerCraftPrimaryHover: #3AB0F7;
+  --color-CareerCraftSecondary: #374151;
+  --color-CareerCraftSecondaryHover: #4B5563;
+  --color-CareerCraftBackground: #111827;
+  --color-CareerCraftForeGround: #1F2937;
+  --color-CareerCraftForeGroundAlt: #121921;
+  --color-CareerCraftForeGroundLight: #374151;
+  --color-CareerCraftForeGroundLightAlt: #4B5563;
+  --color-CareerCraftWhite: #FFFFFF;
+  --color-CareerCraftText: #D1D5DB;
+  --color-CareerCraftInputText: #6B7280;
+  --color-CareerCraftInputBorder: #374151;
+  --color-CareerCraftInputBorderFocus: #1B9AF5;
+  --color-CareerCraftSuccess: #4ADE80;
+  --color-CareerCraftSuccessLight: rgba(34, 197, 94, 0.2);
+  --color-CareerCraftWarning: #FACC15;
+  --color-CareerCraftWarningLight: rgba(234, 179, 8, 0.2);
+  --color-CareerCraftDanger: #EF4444;
+  --color-CareerCraftCardNeutral: #1C222A;
+  --color-CareerCraftCardElevated: #2F3A46;
+  --color-CareerCraftCardLight: #374151;
+  --color-CareerCraftTertiary: #F472B6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
