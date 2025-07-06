@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
   },
   company: {
     fontSize: 11,
-    fontStyle: "italic"
+    fontStyle: "italic",
   },
   location: {
     fontSize: 11,

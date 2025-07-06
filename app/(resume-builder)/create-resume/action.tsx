@@ -71,11 +71,10 @@ const system_message =
   "Extract the information asked from the given input. For any date, return mm-dd-yyyy format " +
   parser.getFormatInstructions();
 
-console.log(system_message);
 console.log("Starting OpenAI model...");
 const model = new ChatOpenAI({
   model: "gpt-4o-mini",
-  apiKey: "",
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 const prepareFields = async (state: any, formData: FormData) => {

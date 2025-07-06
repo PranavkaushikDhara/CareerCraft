@@ -5,11 +5,7 @@ import PrimaryButton from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/app/firebaseConfig";
 
 const Login = () => {
@@ -55,7 +51,7 @@ const Login = () => {
       );
       const user = userCredential.user;
 
-      router.push("/dashboard");
+      router.push("/home");
     } catch (error: any) {
       // Handle specific Firebase auth errors
       switch (error.code) {

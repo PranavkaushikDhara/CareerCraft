@@ -20,20 +20,41 @@ const topElements = [
 
 const SideNav = () => {
   const pathname = usePathname();
-  console.log(pathname);
+  console.log("Dashboard pathname:", pathname);
+  console.log(
+    "Available dashboard routes:",
+    topElements.map(el => el.href)
+  );
+
   return (
-    <div className="hidden md:flex md:flex-col md:w-[200px] md:h-full justify-between border-r border-black">
-      <div className="flex flex-col gap-2 h-full">
-        {topElements.map((element) => (
-          <ButtonLink
-            key={element.title}
-            text={element.title}
-            icon={element.icon}
-            href={element.href}
-          />
-        ))}
+    <div className="hidden md:flex md:flex-col md:w-[200px] md:h-full border-r border-gray-700 bg-CareerCraftBackground shadow-lg">
+      {/* Header Section */}
+      <div className="p-4 border-b border-gray-700 bg-gradient-to-r from-CareerCraftBackground to-CareerCraftPrimaryDark/20">
+        <h2 className="text-lg font-bold text-CareerCraftWhite">
+          Career Tools
+        </h2>
+        <p className="text-xs text-CareerCraftText mt-1">
+          Navigate your career
+        </p>
       </div>
-      <div></div>
+
+      {/* Navigation Items */}
+      <div className="flex flex-col gap-1 p-2 flex-1">
+        {topElements.map(element => {
+          const isActive = pathname === element.href;
+          console.log(
+            `Dashboard route ${element.href}: ${isActive ? "ACTIVE" : "inactive"}`
+          );
+          return (
+            <ButtonLink
+              key={element.title}
+              text={element.title}
+              icon={element.icon}
+              href={element.href}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

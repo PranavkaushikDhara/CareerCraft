@@ -20,7 +20,17 @@ const Skills = () => {
   const skillsToRender = skillsStore.length >= 1 ? skillsStore : skillGroups;
   return (
     <div className="flex flex-col gap-4 max-w-7xl mx-auto p-8">
-      <SkillsForm skills={skillsToRender} />
+      <header className="flex flex-col gap-2">
+        <h1 className="text-3xl font-bold text-CareerCraftWhite">Skills</h1>
+        <p className="text-base text-CareerCraftText">
+          Add your technical and soft skills to showcase your capabilities to
+          potential employers.
+        </p>
+      </header>
+
+      <div className="flex flex-col gap-4 w-full mx-auto">
+        <SkillsForm skills={skillsToRender} />
+      </div>
     </div>
   );
 };

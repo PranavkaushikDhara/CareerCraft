@@ -83,6 +83,8 @@ export interface ResumeStore {
   addProject: (projects: Project[]) => void;
   addAddress: (address: Address) => void;
   addCertification: (certifications: Certification[]) => void;
+  loadResumeData: (data: Partial<ResumeStore>) => void;
+  clearResumeData: () => void;
 }
 
 const useResumeStore = create<ResumeStore>()(
@@ -124,9 +126,52 @@ const useResumeStore = create<ResumeStore>()(
       addCertification(certifications) {
         set({ certifications });
       },
+      loadResumeData(data) {
+        set(data);
+      },
+      clearResumeData() {
+        set({
+          summary: "",
+          firstname: "",
+          lastname: "",
+          address: {
+            city: "",
+            state: "",
+            country: "",
+          },
+          contactDetails: {
+            phone: "",
+            email: "",
+            linkedin: "",
+            github: "",
+          },
+          certifications: [],
+          educationDetails: [],
+          workExperience: [],
+          skills: [],
+          projects: [],
+        });
+      },
     }),
     {
       name: "resume-storage",
+      version: 1,
+      migrate: (persistedState: any, version: number) => {
+        // If version is 0 or undefined, it's the old format
+        if (version === 0 || version === undefined) {
+          // Handle migration from old format to new format
+          if (persistedState && typeof persistedState === "object") {
+            // If the old state has a 'state' property, extract it
+            if (persistedState.state) {
+              return persistedState.state;
+            }
+            // If it's already in the correct format, return as is
+            return persistedState;
+          }
+        }
+        // For current version, return as is
+        return persistedState;
+      },
     }
   )
 );

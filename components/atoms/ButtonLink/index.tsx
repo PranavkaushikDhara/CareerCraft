@@ -1,6 +1,9 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import clsx from "clsx";
+import { usePathname } from "next/navigation";
+
 interface ButtonLinkProps {
   text: string;
   icon?: any;
@@ -9,15 +12,13 @@ interface ButtonLinkProps {
   type?: any;
   front?: boolean;
 }
-import clsx from "clsx";
-import { usePathname } from "next/navigation";
 
 export const ButonLinkSecondary = (props: ButtonLinkProps) => {
   return (
     <button
       type={props.type}
       className={clsx(
-        "text-CareerCraftWhite p-2 text-sm  rounded-md",
+        "text-CareerCraftWhite p-2 text-sm rounded-md",
         props.class
       )}
     >
@@ -40,22 +41,38 @@ export const ButonLinkSecondary = (props: ButtonLinkProps) => {
 
 export const ButtonLink = (props: ButtonLinkProps) => {
   const pathname = usePathname();
+  const isActive = pathname === props.href;
+
   return (
-    <button
+    <Link
+      href={props.href}
       className={clsx(
-        "text-CareerCraftWhite p-2 text-sm hover:bg-CareerCraftForeGroundLight rounded-md",
+        "flex gap-2 items-center text-CareerCraftWhite p-3 text-sm rounded-md transition-all duration-200 w-full group",
         {
-          "bg-CareerCraftPrimary hover:bg-CareerCraftPrimaryDark":
-            pathname === props.href,
+          "bg-CareerCraftPrimary hover:bg-CareerCraftPrimaryDark shadow-md":
+            isActive,
+          "hover:bg-CareerCraftForeGroundLight hover:shadow-sm": !isActive,
         },
         props.class
       )}
     >
-      <Link href={props.href} className="flex gap-2 items-center">
+      <span
+        className={clsx("transition-transform duration-200", {
+          "group-hover:scale-110": !isActive,
+          "scale-110": isActive,
+        })}
+      >
         {props.icon}
+      </span>
+      <span
+        className={clsx("font-medium", {
+          "text-CareerCraftWhite": isActive,
+          "text-CareerCraftText group-hover:text-CareerCraftWhite": !isActive,
+        })}
+      >
         {props.text}
-      </Link>
-    </button>
+      </span>
+    </Link>
   );
 };
 

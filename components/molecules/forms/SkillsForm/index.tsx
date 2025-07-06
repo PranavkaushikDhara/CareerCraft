@@ -25,12 +25,12 @@ const SkillsForm = (props: SkillProps) => {
       return;
     }
 
-    if (skillGroups.some((group) => group.name === trimmedName)) {
+    if (skillGroups.some(group => group.name === trimmedName)) {
       alert("A group with this name already exists");
       return;
     }
 
-    setSkillGroups((prev) => [...prev, { name: trimmedName, skills: [] }]);
+    setSkillGroups(prev => [...prev, { name: trimmedName, skills: [] }]);
     setNewGroupName("");
   };
 
@@ -50,8 +50,8 @@ const SkillsForm = (props: SkillProps) => {
       const newSkill = inputElement.value.trim();
 
       if (newSkill) {
-        setSkillGroups((prevGroups) =>
-          prevGroups.map((group) =>
+        setSkillGroups(prevGroups =>
+          prevGroups.map(group =>
             group.name === groupTitle
               ? {
                   ...group,
@@ -78,19 +78,19 @@ const SkillsForm = (props: SkillProps) => {
         `Are you sure you want to delete the "${groupTitle}" group?`
       )
     ) {
-      setSkillGroups((prevGroups) =>
-        prevGroups.filter((group) => group.name !== groupTitle)
+      setSkillGroups(prevGroups =>
+        prevGroups.filter(group => group.name !== groupTitle)
       );
     }
   };
 
   const handleRemoveSkill = (groupTitle: string, skillToRemove: string) => {
-    setSkillGroups((prevGroups) =>
-      prevGroups.map((group) =>
+    setSkillGroups(prevGroups =>
+      prevGroups.map(group =>
         group.name === groupTitle
           ? {
               ...group,
-              skills: group.skills.filter((skill) => skill !== skillToRemove),
+              skills: group.skills.filter(skill => skill !== skillToRemove),
             }
           : group
       )
@@ -105,16 +105,15 @@ const SkillsForm = (props: SkillProps) => {
 
     if (
       skillGroups.some(
-        (group) =>
-          group.name === editedGroupName.trim() && group.name !== oldName
+        group => group.name === editedGroupName.trim() && group.name !== oldName
       )
     ) {
       alert("A group with this name already exists.");
       return;
     }
 
-    setSkillGroups((prevGroups) =>
-      prevGroups.map((group) =>
+    setSkillGroups(prevGroups =>
+      prevGroups.map(group =>
         group.name === oldName
           ? { ...group, name: editedGroupName.trim() }
           : group
@@ -132,14 +131,13 @@ const SkillsForm = (props: SkillProps) => {
     <div className="flex flex-col gap-4 w-full">
       <form action={handleSaveSkills} className="flex flex-col gap-4">
         <div className="flex justify-between">
-          <h1 className="text-3xl font-bold text-CareerCraftWhite">Skills</h1>
           <div className="flex gap-2 items-center">
             <Input
               name="newGroupName"
               required={false}
               type="text"
               value={newGroupName}
-              onChange={(e) => setNewGroupName(e.target.value)}
+              onChange={e => setNewGroupName(e.target.value)}
               placeholder="Enter new skill group name..."
               className="px-3 py-2 border rounded-md"
             />
@@ -154,7 +152,7 @@ const SkillsForm = (props: SkillProps) => {
         </div>
 
         <div className="p-4 rounded-lg shadow-lg bg-CareerCraftPrimary/10">
-          {skillGroups.map((skillGroup) => (
+          {skillGroups.map(skillGroup => (
             <div key={skillGroup.name} className="mb-6">
               <div className="flex justify-between items-center gap-4 mb-3">
                 {editingGroupName === skillGroup.name ? (
@@ -165,7 +163,7 @@ const SkillsForm = (props: SkillProps) => {
                       required={true}
                       type="text"
                       value={editedGroupName}
-                      onChange={(e) => setEditedGroupName(e.target.value)}
+                      onChange={e => setEditedGroupName(e.target.value)}
                       className="px-3 py-2 border rounded-md text-sm"
                     />
                     <SecondaryButton
@@ -213,13 +211,13 @@ const SkillsForm = (props: SkillProps) => {
                   name="skillInput"
                   type="text"
                   placeholder={`Add a skill to ${skillGroup.name}`}
-                  onKeyDown={(e) => handleAddSkill(skillGroup.name, e)}
+                  onKeyDown={e => handleAddSkill(skillGroup.name, e)}
                   className="px-3 py-2 border rounded-md text-sm w-full"
                 />
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {skillGroup.skills.map((skill) => (
+                {skillGroup.skills.map(skill => (
                   <span
                     key={skill}
                     className="px-3 py-1 rounded-full bg-gradient-to-tr from-CareerCraftBackground to-CareerCraftPrimary/20 text-CareerCraftText text-sm border border-blue-300 flex items-center gap-2"

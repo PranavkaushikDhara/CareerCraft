@@ -10,15 +10,14 @@ import { onAuthStateChanged, User } from "firebase/auth";
 
 function Preview() {
   const [isClient, setIsClient] = useState(false);
-  const [resumeData, setResumeData] = useState<ResumeStore>(useResumeStore());
   const [currentUser, setUser] = useState<User | null>(null);
 
+  // Properly use the Zustand store
+  const resumeData = useResumeStore();
+
   useEffect(() => {
+    console.log(resumeData);
     setIsClient(true);
-    const resumeStore = localStorage.getItem("resume-storage");
-    if (resumeStore) {
-      setResumeData(JSON.parse(resumeStore).state);
-    }
   }, []);
 
   useEffect(() => {

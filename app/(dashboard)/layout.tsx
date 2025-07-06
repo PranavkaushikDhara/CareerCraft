@@ -9,13 +9,24 @@ interface Props {
 
 const DashboardLayout: React.FC<Props> = ({ children }) => {
   return (
-    <div className="flex flex-col gap-2 sticky top-0 text-CareerCraftWhite min-h-screen">
+    <div className="flex flex-col h-screen w-screen text-CareerCraftWhite">
       <Navbar />
-      <div className="w-screen flex flex-1 gap-4">
+      <div className="flex flex-1 overflow-hidden">
         <aside className="hidden md:block">
           <SideNav />
         </aside>
-        <main className="w-full h-full">{children}</main>
+        <main className="w-full overflow-y-auto">
+          {/* Mobile navigation indicator */}
+          <div className="md:hidden p-4 border-b border-gray-700">
+            <h2 className="text-lg font-semibold text-CareerCraftWhite">
+              Dashboard
+            </h2>
+            <p className="text-sm text-CareerCraftText">
+              Use desktop view for full navigation
+            </p>
+          </div>
+          {children}
+        </main>
       </div>
     </div>
   );
