@@ -1,5 +1,5 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import ButtonLink from "@/components/atoms/ButtonLink";
 import React from "react";
 import { FaTools } from "react-icons/fa";
@@ -34,6 +34,7 @@ const ResumeNav = () => {
           />
         ))}
       </div>
+      
       <div></div>
     </div>
   );

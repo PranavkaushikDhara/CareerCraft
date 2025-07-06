@@ -66,7 +66,7 @@ const schema = z.object({
   ),
 });
 const parser = StructuredOutputParser.fromZodSchema(schema);
-// Prevent default form submission behavior
+
 const system_message =
   "Extract the information asked from the given input. For any date, return mm-dd-yyyy format " +
   parser.getFormatInstructions();

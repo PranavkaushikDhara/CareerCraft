@@ -109,18 +109,18 @@ const useResumeStore = create<ResumeStore>()(
       projects: [],
 
       // Actions
-      addSummary: (newSummary) => set({ summary: newSummary }),
-      addFirstName: (newFirstName) => set({ firstname: newFirstName }),
-      addLastName: (newLastName) => set({ lastname: newLastName }),
-      addContact: (newContactDetails) =>
+      addSummary: newSummary => set({ summary: newSummary }),
+      addFirstName: newFirstName => set({ firstname: newFirstName }),
+      addLastName: newLastName => set({ lastname: newLastName }),
+      addContact: newContactDetails =>
         set({ contactDetails: newContactDetails }),
-      addEducation: (newEducationDetails) =>
+      addEducation: newEducationDetails =>
         set({ educationDetails: newEducationDetails }),
-      addWorkExperience: (newWorkExperience) =>
+      addWorkExperience: newWorkExperience =>
         set({ workExperience: newWorkExperience }),
-      addSkill: (newSkills) => set({ skills: newSkills }),
-      addProject: (newProjects) => set({ projects: newProjects }),
-      addAddress: (newAddress) => set({ address: newAddress }),
+      addSkill: newSkills => set({ skills: newSkills }),
+      addProject: newProjects => set({ projects: newProjects }),
+      addAddress: newAddress => set({ address: newAddress }),
       addCertification(certifications) {
         set({ certifications });
       },

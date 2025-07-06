@@ -7,12 +7,14 @@ interface ButtonProps {
   icon?: any;
   type?: "button" | "submit" | "reset";
   className?: string;
+  disabled?: boolean;
   onClickMethod?: () => void;
 }
 const PrimaryButton = (props: ButtonProps) => {
   return (
     <button
       onClick={props.onClickMethod}
+      disabled={props.disabled}
       className="text-CareerCraftWhite rounded-md bg-CareerCraftPrimary py-2 px-2 text-sm hover:bg-CareerCraftPrimaryDark flex items-center gap-2"
     >
       {props.icon} {props.text}

@@ -22,13 +22,13 @@ const ExperienceForm = (props: ExperienceProps) => {
 
   useEffect(() => {
     setExperiences(
-      props.experience?.map((exp) => ({
+      props.experience?.map(exp => ({
         ...exp,
         taskIds: exp.responsibilities?.map(() => crypto.randomUUID()),
       }))
     );
     setOpenStates(new Array(props.experience.length).fill(false));
-    setCurrentJobs(props.experience.map((exp) => exp.currentJob || false));
+    setCurrentJobs(props.experience.map(exp => exp.currentJob || false));
     setExperienceIds(props.experience.map(() => crypto.randomUUID()));
   }, [props.experience]);
 
@@ -42,7 +42,7 @@ const ExperienceForm = (props: ExperienceProps) => {
       experiences[experienceIndex].responsibilityIds != null
         ? [...experiences[experienceIndex].responsibilityIds, ""]
         : [""];
-    setExperiences((prevExperiences) => {
+    setExperiences(prevExperiences => {
       return prevExperiences.map((exp, index) => {
         if (index === experienceIndex) {
           return {
@@ -73,7 +73,7 @@ const ExperienceForm = (props: ExperienceProps) => {
     experienceIndex: number,
     responsibilityIndex: number
   ) => {
-    setExperiences((prevExperiences) => {
+    setExperiences(prevExperiences => {
       return prevExperiences.map((exp, index) => {
         if (index === experienceIndex) {
           return {
@@ -81,7 +81,7 @@ const ExperienceForm = (props: ExperienceProps) => {
             responsibilities: exp.responsibilities.filter(
               (_, taskIndex) => taskIndex !== responsibilityIndex
             ),
-            taskIds: (exp.responsibilities || []).filter(
+            responsibilityIds: exp.responsibilityIds.filter(
               (_, taskIndex) => taskIndex !== responsibilityIndex
             ),
           };
@@ -93,7 +93,7 @@ const ExperienceForm = (props: ExperienceProps) => {
 
   // Handle adding an experience
   const addExperience = () => {
-    setExperiences((prev) => [
+    setExperiences(prev => [
       ...prev,
       {
         title: "",
@@ -108,9 +108,9 @@ const ExperienceForm = (props: ExperienceProps) => {
         currentJob: false,
       },
     ]);
-    setOpenStates((prev) => [...prev, true]);
-    setCurrentJobs((prev) => [...prev, false]);
-    setExperienceIds((prev) => [...prev, crypto.randomUUID()]);
+    setOpenStates(prev => [...prev, true]);
+    setCurrentJobs(prev => [...prev, false]);
+    setExperienceIds(prev => [...prev, crypto.randomUUID()]);
   };
 
   // Handle changing the value of an experience field
@@ -129,17 +129,17 @@ const ExperienceForm = (props: ExperienceProps) => {
 
   // Handle deleting an experience
   const deleteExperience = (index: number) => {
-    setExperiences((prevExperiences) => {
+    setExperiences(prevExperiences => {
       const newExperiences = prevExperiences.filter((_, i) => i !== index);
       return newExperiences;
     });
 
-    setOpenStates((prevOpenStates) => {
+    setOpenStates(prevOpenStates => {
       const newOpenStates = prevOpenStates.filter((_, i) => i !== index);
       return newOpenStates;
     });
 
-    setExperienceIds((prev) => prev.filter((_, i) => i !== index));
+    setExperienceIds(prev => prev.filter((_, i) => i !== index));
   };
 
   // Handle toggling the open state of an experience
@@ -151,12 +151,12 @@ const ExperienceForm = (props: ExperienceProps) => {
 
   // Update handleCurrentJobToggle function
   const handleCurrentJobToggle = (experienceIndex: number) => {
-    setCurrentJobs((prev) => {
+    setCurrentJobs(prev => {
       const updated = [...prev];
       updated[experienceIndex] = !updated[experienceIndex];
 
       // Update experiences when toggling current job
-      setExperiences((prevExperiences) =>
+      setExperiences(prevExperiences =>
         prevExperiences.map((exp, index) =>
           index === experienceIndex
             ? {
@@ -223,7 +223,7 @@ const ExperienceForm = (props: ExperienceProps) => {
 
                   <div
                     className="flex gap-2 items-center"
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={e => e.stopPropagation()}
                   >
                     <SecondaryButton
                       text=""
@@ -255,7 +255,7 @@ const ExperienceForm = (props: ExperienceProps) => {
                         placeholder="Job Title"
                         value={experience.title}
                         name="title"
-                        onChange={(e) =>
+                        onChange={e =>
                           handleExperienceChange(
                             experienceIndex,
                             "title",
@@ -277,7 +277,7 @@ const ExperienceForm = (props: ExperienceProps) => {
                         placeholder="Company or Organization Name"
                         value={experience.company}
                         name="company"
-                        onChange={(e) =>
+                        onChange={e =>
                           handleExperienceChange(
                             experienceIndex,
                             "company",
@@ -303,7 +303,7 @@ const ExperienceForm = (props: ExperienceProps) => {
                         placeholder="City"
                         value={experience.city}
                         name="city"
-                        onChange={(e) =>
+                        onChange={e =>
                           handleExperienceChange(
                             experienceIndex,
                             "city",
@@ -325,7 +325,7 @@ const ExperienceForm = (props: ExperienceProps) => {
                         placeholder="State/Province"
                         value={experience.state}
                         name="state"
-                        onChange={(e) =>
+                        onChange={e =>
                           handleExperienceChange(
                             experienceIndex,
                             "state",
@@ -347,7 +347,7 @@ const ExperienceForm = (props: ExperienceProps) => {
                         placeholder="Country"
                         name="country"
                         className="rounded-md"
-                        onChange={(e) =>
+                        onChange={e =>
                           handleExperienceChange(
                             experienceIndex,
                             "country",
@@ -381,7 +381,7 @@ const ExperienceForm = (props: ExperienceProps) => {
                             : ""
                         }
                         className="rounded-md"
-                        onChange={(e) =>
+                        onChange={e =>
                           handleExperienceChange(
                             experienceIndex,
                             "startDate",
@@ -415,7 +415,7 @@ const ExperienceForm = (props: ExperienceProps) => {
                                 .split("T")[0]
                             : ""
                         }
-                        onChange={(e) =>
+                        onChange={e =>
                           handleExperienceChange(
                             experienceIndex,
                             "endDate",
@@ -459,7 +459,7 @@ const ExperienceForm = (props: ExperienceProps) => {
                               responsibilityIndex + 1
                             }`}
                             value={responsibility}
-                            onChange={(e) =>
+                            onChange={e =>
                               handleResponsibilityChange(
                                 experienceIndex,
                                 responsibilityIndex,

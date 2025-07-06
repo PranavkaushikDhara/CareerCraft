@@ -4,7 +4,7 @@ import { FormSubmitButton } from "@/components/atoms/Button";
 import { TextArea } from "@/components/atoms/Input";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
-import React, { useActionState, useEffect, useState } from "react";
+import React, { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
 
 const CreateResumeForm: React.FC = () => {

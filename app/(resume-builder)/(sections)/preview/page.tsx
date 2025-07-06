@@ -4,10 +4,14 @@ import { useEffect, useState } from "react";
 import { MakePDF } from "./Resume";
 import { ResumeStore } from "@/store/ResumeStore";
 import useResumeStore from "@/store/ResumeStore";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, database } from "@/app/firebaseConfig";
+import { onAuthStateChanged, User } from "firebase/auth";
 
 function Preview() {
   const [isClient, setIsClient] = useState(false);
   const [resumeData, setResumeData] = useState<ResumeStore>(useResumeStore());
+  const [currentUser, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     setIsClient(true);
@@ -16,6 +20,65 @@ function Preview() {
       setResumeData(JSON.parse(resumeStore).state);
     }
   }, []);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user: User | null) => {
+      console.log("Auth state changed:", user);
+      console.log("User displayName:", user?.displayName);
+      console.log("User email:", user?.email);
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const saveDetailsToDatabase = async (resumeData: ResumeStore) => {
+    if (!currentUser) {
+      console.error("No authenticated user found");
+      return;
+    }
+
+    console.log("Saving resume data for user:", currentUser.uid);
+
+    try {
+      // Use setDoc with user UID as document ID to ensure single document per user
+      const resumeDocRef = doc(database, "resumes", currentUser.uid);
+
+      await setDoc(
+        resumeDocRef,
+        {
+          userId: currentUser.uid,
+          userEmail: currentUser.email,
+          title: `${resumeData.firstname} ${resumeData.lastname} - Resume`,
+          template: "default",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          // All resume sections in one document
+          contact: {
+            firstname: resumeData.firstname,
+            lastname: resumeData.lastname,
+            contactDetails: resumeData.contactDetails,
+            address: resumeData.address,
+          },
+          summary: resumeData.summary,
+          experience: resumeData.workExperience,
+          education: resumeData.educationDetails,
+          skills: resumeData.skills,
+          projects: resumeData.projects,
+          certifications: resumeData.certifications,
+        },
+        { merge: true }
+      ); // merge: true allows updating existing document
+
+      console.log("Resume saved successfully!");
+    } catch (error) {
+      console.error("Error saving resume:", error);
+    }
+  };
 
   return (
     <div className=" p-4 md:p-8">
@@ -29,13 +92,13 @@ function Preview() {
 
           <PDFDownloadLink
             document={<MakePDF resumeStore={resumeData} />}
+            onClick={() => {
+              saveDetailsToDatabase(resumeData);
+            }}
             fileName="resume.pdf"
             className="w-full md:w-auto px-6 py-3 bg-CareerCraftPrimary hover:bg-CareerCraftPrimaryDark text-CareerCraftWhite rounded-lg transition-colors duration-200 text-center font-medium shadow-md"
           >
-            {/* {({ loading }) => 
-              loading ? "Generating PDF..." : "Download Resume"
-            } */}
-            Download Resume
+            Save & Download
           </PDFDownloadLink>
         </div>
       )}

@@ -1,3 +1,4 @@
+"use client";
 import SideNav from "@/components/molecules/SideNav";
 import Navbar from "@/components/molecules/Navbar";
 import React from "react";

@@ -1,14 +1,11 @@
 "use client";
 import { PDFViewer } from "@react-pdf/renderer";
-import { MakePDF } from "@/app/(user)/(builder)/preview/Resume";
+import { MakePDF } from "@/app/(resume-builder)/(sections)/preview/Resume";
 import useResumeStore from "@/store/ResumeStore";
 import { FormSubmitButton } from "@/components/atoms/Button";
-import { useState, useEffect, useActionState, FormEvent } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
 import { FaWandMagicSparkles } from "react-icons/fa6";
-import Form from "next/form";
 // import { tailorResume } from "./action";
-import { useRouter } from "next/router";
 import { useFormStatus } from "react-dom";
 export default function TailorPage() {
   const [isClient, setIsClient] = useState(false);

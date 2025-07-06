@@ -3,14 +3,12 @@
 import React, { useEffect, useState } from "react";
 import ExperienceForm from "@/components/molecules/forms/ExperienceForm";
 import { Work } from "@/store/ResumeStore";
-
+import { getDoc, doc } from "firebase/firestore"; // Implement this in the future
 import useResumeStore from "@/store/ResumeStore";
 
 const Experience = () => {
   const [experienceData, setExperienceData] = useState<Work[]>([]);
-  const workExperience = useResumeStore.getState().workExperience;
-  console.log(workExperience);
-  console.log(experienceData);
+  const workExperience = useResumeStore.getState().workExperience; // TODO: Implement this in the future. Get from database and use local storage as fallback
 
   useEffect(() => {
     const resumeData = localStorage.getItem("resumeData");

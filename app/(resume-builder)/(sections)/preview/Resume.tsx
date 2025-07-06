@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     size: "LEGAL",
     fontSize: 11,
     lineHeight: 1.5,
-    fontFamily: "Times-Roman",
+    fontFamily: "Helvetica",
   },
   section: {
     // marginBottom: 8,
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 26,
     fontWeight: "bold",
-    fontFamily: "Times-Bold",
+    fontFamily: "Helvetica-Bold",
     marginBottom: 11,
   },
   contact: {
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 13,
-    fontFamily: "Times-Bold",
+    fontFamily: "Helvetica-Bold",
 
     marginBottom: 4,
     // padding: 4,
@@ -197,10 +197,11 @@ const styles = StyleSheet.create({
   jobTitle: {
     fontSize: 13,
 
-    fontFamily: "Times-Bold",
+    fontFamily: "Helvetica-Bold",
   },
   company: {
     fontSize: 11,
+    fontStyle: "italic"
   },
   location: {
     fontSize: 11,
@@ -238,7 +239,7 @@ const styles = StyleSheet.create({
   },
   skillTitle: {
     fontSize: 11,
-    fontFamily: "Times-Bold",
+    fontFamily: "Helvetica-Bold",
     marginBottom: 2,
   },
   skillContent: {
