@@ -1,4 +1,4 @@
-# CareerCraft 🚀
+# CareerCraft 🚀 
 
 A modern, AI-powered resume builder and career development platform built with Next.js, React, and Firebase. Create professional resumes with intelligent suggestions and real-time collaboration.
 
